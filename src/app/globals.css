@@ -1,26 +1,107 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* 1. Freeze the layout and stop default fade animations */
+::view-transition-group(root) {
+  animation: none;
+  isolation: isolate;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* 2. Position the old layer below and the incoming layer above */
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 9999;
+  animation: circle-reveal 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* 3. Smooth expanding circle originating from the top right corner */
+@keyframes circle-reveal {
+  from {
+    clip-path: circle(0% at calc(100% - 60px) 40px);
+  }
+  to {
+    clip-path: circle(150% at calc(100% - 60px) 40px);
   }
 }
 
+@keyframes grow-to-dark {
+  from {
+    clip-path: circle(0% at calc(100% - 60px) 40px);
+  }
+  to {
+    clip-path: circle(150% at calc(100% - 60px) 40px);
+  }
+}
+
+/* Animation for switching to Light Mode */
+@keyframes grow-to-light {
+  from {
+    clip-path: circle(0% at calc(100% - 60px) 40px);
+  }
+  to {
+    clip-path: circle(150% at calc(100% - 60px) 40px);
+  }
+}
+
+@utility animate-grow-dark {
+  animation: grow-to-dark 0.6s ease-out forwards;
+}
+
+@utility animate-grow-light {
+  animation: grow-to-light 0.6s ease-out forwards;
+}
+
+:root {
+   --background: #ffffff;
+   --foreground: #171717;
+   --font-sans: var(--vazir), system-ui, -apple-system, sans-serif;
+}
+
+@theme inline {
+   --color-background: var(--background);
+   --color-foreground: var(--foreground);
+   --font-sans: var(--font-geist-sans);
+   --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+   :root.dark {
+      --background: #0a0a0a;
+      --foreground: #ededed;
+   }
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+   background: var(--background);
+   color: var(--foreground);
+   font-family: var(--font-sans);
+   user-select: none;
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+}
+
+
+
+
+
+
+.run_animate {
+   position: relative;
+   top: -300vh;
+   animation: 50s slide linear forwards;
+}
+
+@keyframes slide {
+   to {
+      top: 100vh;
+   }
 }
