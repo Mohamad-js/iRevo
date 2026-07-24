@@ -36,15 +36,12 @@ const Home = () => {
             <ThemeToggle />
          </div>
 
-         <div className="w-full h-full flex items-start justify-between content-start flex-wrap border border-gray-200 dark:border-zinc-800 rounded-2xl flex-1 p-2 gap-4">
+         <div className="w-full h-full border border-gray-200 dark:border-zinc-800 rounded-2xl p-2 gap-4">
                {
                   data?.map((prof, index) => (
                      <Link href={`/profile/${index}`} key={index}>
                         <Profile
-                           name={prof.name}
-                           photo={prof.imgURL}
-                           side={prof.side}
-                           id={index}
+                           data={prof}
                         />
                      </Link>
                   ))
