@@ -29,14 +29,14 @@ const Home = () => {
    if (!mounted) return null;
 
    return (
-      <div className="w-full min-h-screen bg-white dark:bg-black text-zinc-900 dark:text-zinc-100 flex flex-col gap-3 justify-start items-center p-3">
+      <div className="fixed w-full h-screen text-zinc-900 dark:text-zinc-100 flex flex-col gap-3 justify-start items-center p-3">
 
          <div className="w-full h-15 bg-gray-100 dark:bg-zinc-700 rounded-2xl flex justify-between items-center p-2 pr-4">
-            <div className="text-black dark:text-white text-xl font-bold">نفوذ شناسی</div>
+            <div className="text-xl font-bold">نفوذ شناسی</div>
             <ThemeToggle />
          </div>
 
-         <div className="w-full h-full border border-gray-200 dark:border-zinc-800 rounded-2xl p-2 gap-4">
+         <div className="w-full min-h-0 overflow-auto rounded-2xl gap-4">
                {
                   data?.map((prof, index) => (
                      <Link href={`/profile/${index}`} key={index}>

@@ -2,39 +2,11 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* 1. Freeze the layout and stop default fade animations */
-::view-transition-group(root) {
-  animation: none;
-  isolation: isolate;
-}
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
 
-/* 2. Position the old layer below and the incoming layer above */
-::view-transition-old(root) {
-  z-index: 1;
-}
-::view-transition-new(root) {
-  z-index: 9999;
-  animation: circle-reveal 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-/* 3. Smooth expanding circle originating from the top right corner */
-@keyframes circle-reveal {
-  from {
-    clip-path: circle(0% at calc(0% - 60px) 40px);
-  }
-  to {
-    clip-path: circle(150% at calc(0% - 60px) 40px);
-  }
-}
 
 :root {
    --background: #ffffff;
-   --foreground: #171717;
+   --foreground: #000000;
    --font-sans: var(--vazir), system-ui, -apple-system, sans-serif;
 }
 
@@ -47,8 +19,8 @@
 
 @media (prefers-color-scheme: dark) {
    :root.dark {
-      --background: #0a0a0a;
-      --foreground: #ededed;
+      --background: #000000;
+      --foreground: #ffffff;
    }
 }
 

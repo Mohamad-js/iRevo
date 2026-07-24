@@ -34,8 +34,36 @@ function DynamicProfile(){
 
 
    return(
-      <div className='min-w-screen min-h-screen flex justify-center items-center text-black bg-white dark:bg-black dark:text-white'>
-         {data?.name}
+      <div className='fixed min-w-screen h-screen p-5 gap-5 flex justify-start items-start flex-col'>
+         <div className="text-4xl">{data?.name}</div>
+
+         <div className="w-full min-h-0 flex-1 border rounded-2xl overflow-auto">
+            <div className="w-full flex flex-col gap-5 p-4">
+               <div className="text-2xl border-0 border-b pb-2">جناح ها</div>
+               {
+                  data?.parties.map((party, index) => (
+                     <div key={index} className="">
+                        <div className="">{party.from} تا {party.to}</div>
+                        <div className="">{party.title}</div>
+                     </div>
+                  ))
+               }
+            </div>
+
+            <div className="w-full flex flex-col gap-5 p-4">
+                  <div className="text-2xl border-0 border-b pb-2">سمت ها</div>
+               {
+                  data?.positions.map((party, index) => (
+                     <div key={index} className="">
+                        <div className="">{party.from} تا {party.to}</div>
+                        <div className="">{party.title}</div>
+                     </div>
+                  ))
+               }
+            </div>
+
+         </div>
+
       </div>
    )
 }
